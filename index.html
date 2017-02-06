@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bowling Score</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div ng-app="app" ng-controller="myCtrl" id="bowl">
+    <table align="center">
+    <tr>
+        <th>Frame</th>
+        <th>First</th>
+        <th>Second</th>
+        <th>Third</th>
+        <th>Frame Score</th>
+        <th>Score</th>
+    </tr>
+    <tr ng-repeat = "item in frame.frames">
+        <td> {{ $index + 1}} </td>
+        <td> {{ item.first }} </td>
+        <td> {{ item.second }} </td>
+        <td> {{ item.third }} </td>
+        <td> {{ perframe[$index] }} </td>
+        <td> {{ scoretillframe[ $index ] }} </td>
+    </tr>
+    </table>
+
+    <br><br>
+
+    <form ng-submit="add(first,second,third)" >
+    <table  ng-show="max_frames(frame.frames.length)" align="center">
+    <tr>
+        <th>First</th>
+        <th>Second</th>
+        <th ng-if = "third_roll(first,second,frame.frames.length)">Third</th>
+    </tr>
+    <tr>
+
+        <td>
+            <input type="number" min = 0 max = 10 name="first" ng-model="first" required/>&nbsp;&nbsp;&nbsp;
+        </td>
+        <td ng-if="!frame10(frame.frames.length)">
+            <input type="number" min=0 max = {{10-first}} name="second" ng-model="$parent.second" ng-show="first != undefined" required/>&nbsp;&nbsp;&nbsp;
+        </td>
+        <td ng-if="frame10(frame.frames.length) && first != undefined && first<10">
+            <input type="number" min=0 max = {{10-first}} name="second" ng-model="$parent.second"  required/>&nbsp;&nbsp;&nbsp;
+        </td>
+        <td ng-if="frame10(frame.frames.length) && first == 10 ">
+            <input type="number" min=0 max = 10 name="second" ng-model="$parent.second"  required/>&nbsp;&nbsp;&nbsp;
+        </td>
+        <td ng-if ="third_roll(first,second,frame.frames.length) && second==10">
+             <input min=0 max = 10 type="number" name="third" ng-model="$parent.third" required/>&nbsp;&nbsp;&nbsp;
+        </td>
+        <td ng-if ="third_roll(first,second,frame.frames.length) &&first == 10 && second < 10 ">
+             <input min=0 max = {{10-second}} type="number" name="third" ng-model="$parent.third" required/>&nbsp;&nbsp;&nbsp;
+        </td>
+        <td ng-if ="third_roll(first,second,frame.frames.length) &&first < 10 && second < 10 ">
+             <input min=0 max = 10 type="number" name="third" ng-model="$parent.third" required/>&nbsp;&nbsp;&nbsp;
+        </td>
+
+    </tr>
+    </table>
+
+        <div align="center">
+            <button type="submit" value="Submit" ng-show="max_frames(frame.frames.length)" > Submit </button>
+        </div>
+    </form>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="js/app.js"></script>
+</html>

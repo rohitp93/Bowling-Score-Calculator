@@ -1,0 +1,47 @@
+Bowling Score Calculator
+------------------------
+
+Calculates the score a 10 pin bowling game.
+
+This application consists of a dynamic webpage that accurately displays the score of a bowling match.
+The user can enter the Webpage and enter the scores into the text boxes in the frontend labeled first
+and second for each of the two rolls in each frame.
+
+After clicking submit, an http request is sent asynchronously to a php file serving as the backend
+the backend calculates the sum and returns the sum for the current fram along with total score and
+the score till that particular frame.
+
+The data is handled by the browser, so once refreshed the scores are reset.
+
+The app can be started by executing the shell script start.sh
+
+Requirements
+------------
+Make sure the host has a working version of PHP and AngualarJS
+Also npm is needed to get the dependencies
+PHPUnit is needed for backend unit testing
+
+1. First, extract the project and type npm install in the terminal to get all the dependencies
+2. start the application by launching the start.sh script - ./start.sh
+3. Go to the browser and go to http://localhost:8000 to view the webpage
+4. Enter the scores and click submit to check the calculator
+
+Backend: PHP
+Frontend: HTML, CSS, Angular
+Testing, Jasmine, Karma, PHPUnit
+
+Tests
+-----
+
+To run the tests for Frontend
+Go to the terminal and cd into the main folder
+to launch karma type
+
+$ karma start
+
+To run the tests for Backend
+Go to the terminal and cd into the tests folder
+and then type
+
+$ php phpunit.phar backend_unit.php
+
